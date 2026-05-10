@@ -1,0 +1,41 @@
+{
+  "name": "Tab Shortcuts",
+  "description": "Add some shortcuts for tabs",
+  "version": "1.1",
+  "manifest_version": 3,
+  "permissions": ["tabs", "tabGroups"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "commands": {
+    "open-tab-current-group": {
+      "suggested_key": {
+        "default": "Ctrl+T",
+        "mac": "Command+T"
+      },
+      "description": "Open new tab in current group"
+    },
+    "open-tab-new-group": {
+      "suggested_key": {
+        "default": "Ctrl+N",
+        "mac": "Command+N"
+      },
+      "description": "Open new tab in a new group"
+    },
+    "move-tab-to-group": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "Command+M"
+      },
+      "description": "Move tab(s) to group"
+    },
+    "rename-current-group": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+R",
+        "mac": "Command+Shift+R"
+      },
+      "description": "Rename current tab group"
+    }
+  },
+  "icons": { "48": "img/icon48.png", "128": "img/icon128.png" }
+}
