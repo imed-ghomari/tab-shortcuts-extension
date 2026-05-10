@@ -1,28 +1,41 @@
-# New Group Tab Shortcuts
+# Tab Shortcuts
 
-A chrome extension which adds some shortcuts for tabs.
+A Chrome extension for managing tab groups with keyboard shortcuts.
 
-## Available Shortcuts
+## Features
 
-* Open new tab in current group
-  * Default :<kbd>Alt + Shift + T</kbd> (Windows/Linux) or <kbd>⌥ Option + ⇧ Shift + T</kbd> (Mac)
-* Open new tab in a new group
-  * Default: <kbd>Alt + Shift + G</kbd> (Windows/Linux) or <kbd>⌥ Option + ⇧ Shift + G</kbd> (Mac)
-* Ungroup current tab
-  * Default: not set
-* Toggle sound of current tab
-  * Default: <kbd>Alt + Shift + S</kbd> (Windows/Linux) or <kbd>⌥ Option + ⇧ Shift + S</kbd> (Mac)
-* Duplicate current tab
-  * Default: <kbd>Alt + Shift + D</kbd> (Windows/Linux) or <kbd>⌥ Option + ⇧ Shift + D</kbd> (Mac)
+- Open a new tab inside the current tab group.
+- Open a new tab in a brand-new tab group and name it immediately.
+- Move the current tab, or highlighted tabs, to an existing group.
+- Create a new group directly from the move dialog when no group matches your search.
+- Rename the current tab group from a small popup window.
+- Automatically group the active tab when Chrome starts.
 
-## Limitations
+## Default Shortcuts
 
-* Require Chrome 88+.
-* Because extension can only set 4 default shortcuts, you have to navigate to [chrome://extensions/shortcuts](chrome://extensions/shortcuts) and manually config other shortcuts by yourself.
+- Open new tab in current group
+  Windows/Linux: <kbd>Ctrl + T</kbd>
+  Mac: <kbd>⌘ Command + T</kbd>
+- Open new tab in a new group
+  Windows/Linux: <kbd>Ctrl + N</kbd>
+  Mac: <kbd>⌘ Command + N</kbd>
+- Move tab(s) to another group
+  Windows/Linux: <kbd>Ctrl + M</kbd>
+  Mac: <kbd>⌘ Command + M</kbd>
+- Rename current tab group
+  Windows/Linux: <kbd>Ctrl + Shift + R</kbd>
+  Mac: <kbd>⌘ Command + Shift + R</kbd>
+
+## Notes
+
+- Requires Chrome 88 or newer.
+- Chrome may refuse some suggested defaults if they conflict with built-in browser shortcuts, especially on macOS.
+- You can review or customize shortcuts at `chrome://extensions/shortcuts`.
 
 ## Credits
 
 Logo is created at [LogoMark.com](https://logomakr.com/).
 
 ## License
+
 MIT
