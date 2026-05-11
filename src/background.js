@@ -1,4 +1,5 @@
 const api = typeof browser !== 'undefined' ? browser : chrome;
+const promptedStartupGroupIds = new Set();
 
 api.runtime.onStartup.addListener(() => ensureActiveTabsGroupedOnLaunch());
 api.runtime.onInstalled.addListener(() => ensureActiveTabsGroupedOnLaunch());
@@ -42,10 +43,45 @@ async function ensureActiveTabsGrouped() {
     const windows = await api.windows.getAll({ populate: true, windowTypes: ['normal'] });
     for (const window of windows) {
       const activeTab = (window.tabs || []).find(tab => tab.active);
-      if (!activeTab || activeTab.groupId !== -1) continue;
-      await api.tabs.group({ tabIds: activeTab.id });
+      if (!activeTab) continue;
+
+      if (activeTab.groupId === -1) {
+        const groupId = await api.tabs.group({ tabIds: activeTab.id });
+        await promptToNameStartupGroup(window.id, activeTab.id, groupId);
+        continue;
+      }
+
+      const group = await getTabGroupById(activeTab.groupId);
+      if (group && !group.title) {
+        await promptToNameStartupGroup(window.id, activeTab.id, activeTab.groupId);
+      }
     }
   } catch (_) {}
+}
+
+async function getTabGroupById(groupId) {
+  try {
+    const groups = await api.tabGroups.query({});
+    return groups.find(group => group.id === groupId) || null;
+  } catch (_) {
+    return null;
+  }
+}
+
+async function promptToNameStartupGroup(windowId, tabId, groupId) {
+  if (promptedStartupGroupIds.has(groupId)) return;
+  promptedStartupGroupIds.add(groupId);
+
+  try {
+    await openDialog('name-group', {
+      groupId,
+      mode: 'create',
+      sourceWindowId: windowId,
+      focusTabId: tabId
+    });
+  } catch (_) {
+    promptedStartupGroupIds.delete(groupId);
+  }
 }
 
 async function openTabCurrentGroup(currentTab) {
